@@ -1,159 +1,105 @@
-# Demand Forecasting Method Comparison
+# Demand Forecasting Model Evaluation
 **Academic Case Study Analysis | Baruch College | Fall 2023**
 
-*Collaborative team project analyzing optimal forecasting approaches for seasonal demand patterns in manufacturing supply chains.*
+Team project analyzing seasonal demand to identify the most
+accurate forecasting method for inventory planning.
+
+---
+
+## 📊 Interactive Dashboard
+**Download:** [Power BI Dashboard (.pbix)](Demand_Forecasting_Model_Evaluation.pbix)  
+**View:** [PDF Export](Demand_Forecasting_Model_Evaluation.pdf)
+
+---
 
 ## Project Overview
-Comprehensive statistical analysis comparing 10 forecasting methods to solve a real-world inventory management challenge. Evaluated methods across multiple error metrics (MAD, MSE, MAPE) to identify the optimal approach for reducing stockouts while minimizing holding costs.
+Compared **10 forecasting methods** using **108 monthly observations (2003–2012)**
+to find the best approach for reducing forecast error in a seasonal supply chain.
+
+**Best method:** Holt-Winters' Additive  
+**Key metrics:** MAPE = 10.68% | MAD = 1,263.4 | MSE = 2,912,807.8 | RMSE = 1,715.7
+
+---
 
 ## Business Context
-**Industry:** Manufacturing & Supply Chain  
-**Problem:** High seasonal demand variability (40% swings) leading to stockouts and excess inventory  
-**Challenge:** Existing judgmental forecasting achieved only 63% accuracy  
-**Objective:** Identify statistical method to improve forecast accuracy and reduce costs
+- **Problem:** ABC Industrial, an equipment manufacturer with 4 plants and 6 regional stockyards serving hundreds of dealers nationwide, struggled to plan inventory under ±40% seasonal demand swings.  
+- **Impact:** Seasonal demand peaks disrupted supply and caused frequent stockouts in some regions and excess inventory in others, triggering emergency stockyard-to-stockyard transfers at **$145/unit** for **6.7% of annual volume** (~14,800 units/year), or **~$2.1M/year** in logistics cost.  
+- **Root Cause:** Legacy forecasting methods did not capture both seasonality and the underlying demand trend, limiting the ability to plan regional inventory effectively.  
+- **Goal:** Identify the most suitable forecasting method for ABC to reduce emergency transfer costs and improve inventory planning.  
+- **Solution:** ABC Industrial should implement a Holt-Winters Additive model to improve its forecast accuracy and better support regional inventory allocation, helping to reduce emergency transfer costs.
 
-### Key Business Metrics Analyzed:
-- Historical sales data: 9+ years of monthly demand
-- Seasonal peaks: April-June and September-November
-- Current costs: $145 avg transportation cost per unit for emergency transfers
-- Impact: 6.7% of annual volume affected by poor forecasting
+---
 
-## My Role & Contributions
-As part of a 4-person analytics team, I led the quantitative analysis by:
-- **Data preparation:** Cleaned and structured 100+ months of historical sales data
-- **Statistical modeling:** Implemented and optimized Holt-Winter's additive and multiplicative models
-- **Error analysis:** Calculated and compared MAD, MSE, and MAPE across all methods
-- **Visualization:** Created comparison charts showing forecast vs. actual demand patterns
-- **Business recommendations:** Translated statistical findings into actionable supply chain improvements
+## My Contribution
+As part of a 4-person analytics team, I focused on the quantitative forecasting work:
+- **Data preparation:** Structured 108 months of historical demand data for analysis
+- **Model building:** Built and optimized advanced forecasting methods in Excel using Solver
+- **Error evaluation:** Calculated MAD, MSE, and MAPE
+- **Dashboard:** Built an interactive Power BI dashboard with DAX-driven method switching
+- **Business translation:** Summarized results and implications for inventory planning
 
-## Methodology
+---
 
-### Methods Evaluated (10 Total):
+## Methods Evaluated (10)
 
-**Simple Methods:**
+**Simple Methods (5)**
 1. Naïve Forecast
 2. Moving Average (3-month)
 3. Moving Average (4-month)
-4. Weighted Moving Average (3-month with optimized weights)
-5. Weighted Moving Average (4-month with optimized weights)
+4. Weighted Moving Average (3-month) — optimized weights
+5. Weighted Moving Average (4-month) — optimized weights
 
-**Advanced Methods:**
-6. Linear Regression
-7. Exponential Smoothing (optimized alpha)
-8. Time Series Decomposition
-9. Holt-Winter's Multiplicative Seasonal
-10. **Holt-Winter's Additive Seasonal** ⭐ *Winner*
+**Advanced Methods (5) — Solver-optimized**
 
-### Evaluation Metrics:
-- **MAD** (Mean Absolute Deviation) - Average forecast error magnitude
-- **MSE** (Mean Squared Error) - Penalizes large errors more heavily
-- **MAPE** (Mean Absolute Percentage Error) - Error as percentage of actual demand
+6. Linear Regression (R² = 0.65)
+7. Exponential Smoothing (α = 0.207)
+8. Time Series Decomposition (trend × seasonal)
+9. Holt-Winters' Multiplicative (α ≈ 0.336, β ≈ 0.002, γ = 1.0)
+10. **Holt-Winters' Additive ⭐** (α = 0.389, β = 0.006, γ = 1.0)
 
-## Key Findings
+---
 
-### Performance Comparison
+## Key Results
 
-| Method | MAD | MSE | MAPE |
-|--------|-----|-----|------|
-| Naïve | 2,418.67 | 10,663,081 | 21.44% |
-| Moving Avg (4-month) | 1,800.10 | 8,414,118 | 19.03% |
-| **Holt-Winter's Additive** | **1,263.42** | **2,912,808** | **10.68%** |
+### Top 5 Performance Ranking
+| Rank | Method                      | MAD     | MSE           | MAPE   |
+|------|-----------------------------|--------:|--------------:|-------:|
+| 🥇   | **Holt-Winters' Additive**  | 1,263.4 | 2,912,807.8   | 10.68% |
+| 🥈   | Holt-Winters' Multiplicative| 1,300.9 | 3,028,049.9   | 11.15% |
+| 🥉   | Time Series                 | 1,336.1 | 3,057,668.0   | 11.86% |
+| 4    | Exponential Smoothing       | 1,971.9 | 7,786,874.4   | 16.59% |
+| 5    | Weighted MA (4-month)       | 2,026.4 | 7,345,878.1   | 17.40% |
 
-### Winner: Holt-Winter's Additive Method
+### Why Holt-Winters' Additive Won
+- Captures both **trend** and **seasonality** simultaneously
+- An additive model fits well when seasonal variation is consistent in size
+- Achieved the lowest MAPE across all 10 methods tested
 
-**Why it won:**
-- Captures both **trend** (upward growth) and **seasonality** (dual peak periods)
-- Achieved **10.68% MAPE** - lowest error across all metrics
-- **50% improvement** over simple forecasting methods
-- **47% improvement** over current judgmental approach (from 21.4% to 10.68%)
+---
 
-**Optimized Parameters:**
-- Alpha (level): 0.3889
-- Beta (trend): 0.0062  
-- Gamma (seasonality): 1.0
-- RMSE: 1,715.65
-
-## Business Impact
-
-### Quantified Benefits:
-1. **Cost Reduction:** Potential $2.1M annual savings from reduced forecast error
-   - Lower emergency transportation costs (currently $145/unit × 6.7% of volume)
-   - Reduced stockout-related discounting
-   
-2. **Inventory Optimization:** 
-   - Better alignment of production with seasonal demand
-   - Reduced safety stock requirements during low seasons
-   - Improved capital efficiency (less cash tied up in excess inventory)
-
-3. **Customer Satisfaction:**
-   - Fewer stockouts during peak seasons
-   - Reduced dealer complaints about irregular supply
-   - Improved market reputation and loyalty
-
-### Implementation Recommendation:
-- Extend forecasting horizon from 3 months to 12 months
-- Implement monthly model performance monitoring
-- Prioritize top 25 models (73% of sales volume) for refined forecasting
-- Establish automated alerts for demand pattern changes
-
-## Technical Skills Demonstrated
-- **Statistical Modeling:** Time series analysis, regression, exponential smoothing
-- **Excel Advanced:** Solver optimization, Data Analysis ToolPak, complex formulas
-- **Data Visualization:** Trend analysis, seasonal decomposition charts, comparative visualizations
-- **Business Analytics:** Error metric selection, model validation, ROI calculation
-- **Communication:** Translating technical findings into executive recommendations
-
-## Tools & Technologies
-- Microsoft Excel (Data Analysis ToolPak, Solver)
-- Statistical forecasting methods
-- Time series decomposition techniques
-- Error metric calculations (MAD, MSE, MAPE)
-
-## Visualizations
-
-### Comparison of Forecasting Methods
-![Forecasting Methods Comparison](analysis_results.png)
-*Holt-Winter's Additive method (MAPE: 10.68%) significantly outperforms all other approaches across MAD, MSE, and MAPE metrics.*
-
-### Key Insights from Visual Analysis:
-- Seasonal patterns clearly visible with 40% demand swings
-- Simple methods (Naïve, Moving Average) lag behind seasonal changes
-- Advanced methods (Holt-Winter's) adapt to both trend and seasonality
-- 9-year upward trend indicates growing market demand
-
-## Lessons Learned
-
-1. **Methodology matters:** Advanced statistical methods can dramatically outperform simple approaches when data exhibits clear patterns (trend + seasonality)
-
-2. **Multiple metrics required:** Evaluating across MAD, MSE, and MAPE ensures robust model selection rather than optimizing for a single measure
-
-3. **Parameter optimization is critical:** Fine-tuning alpha, beta, and gamma parameters through Solver optimization improved model performance by 15-20%
-
-4. **Business context drives decisions:** The 50% accuracy improvement translates directly to measurable cost savings and competitive advantage
-
-## Future Enhancements
-If continuing this analysis, potential improvements include:
-- **Machine learning models:** ARIMA, Prophet, LSTM neural networks
-- **External variables:** Incorporate weather, economic indicators, competitor actions
-- **SKU-level forecasting:** Apply methodology to individual product models
-- **Ensemble methods:** Combine multiple forecasts for improved accuracy
-
-## Project Note
-*This analysis was completed as part of a team case study project at Baruch College's Zicklin School of Business. The case study materials were provided as part of coursework. All statistical analysis, calculations, and visualizations represent original work performed by our team.*
+## Skills Demonstrated
+- **Forecasting:** Holt-Winters (additive/multiplicative), Exponential smoothing,
+  Time-Series decomposition and Linear regression
+- **Excel (Advanced):** Solver optimization, Data Analysis ToolPak
+- **Power BI:** DAX measures, data modeling, interactive dashboard design
 
 ---
 
 ## Repository Structure
+
 ```
 01-forecasting-analysis/
-├── README.md                          # This file
-├── analysis_results.png               # Method comparison visualization
-└── methodology.md                     # Detailed statistical approach
+├── README.md                                      # This file
+├── methodology.md                                 # Detailed formulas
+├── Case_Study_Demand_Forecasting.xlsx             # Excel calculations and charts
+├── Demand_Forecasting_Model_Evaluation.pbix       # Power BI interactive dashboard
+└── Demand_Forecasting_Model_Evaluation.pdf        # Dashboard export
 ```
+---
 
 ## Contact
-Questions about this analysis? Connect with me on [LinkedIn](https://linkedin.com/in/davronoff) or email davronof08@gmail.com
+Questions about this analysis? Connect with me on 💼[LinkedIn](https://linkedin.com/in/davronoff) or 📧 [Email](mailto:davronof08@gmail.com)
 
 ---
 
-*Skills showcased: Statistical Forecasting • Time Series Analysis • Inventory Optimization • Supply Chain Analytics • Data-Driven Decision Making*
+*Skills: Statistical Forecasting • Time Series Analysis • Power BI • DAX • Excel Solver • Holt-Winter's Method • Supply Chain Analytics*
