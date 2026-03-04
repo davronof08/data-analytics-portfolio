@@ -7,8 +7,9 @@ accurate forecasting method for inventory planning.
 ---
 
 ## 📊 Interactive Dashboard
-**Download:** [Power BI Dashboard (.pbix)](Demand_Forecasting_Model_Evaluation.pbix)  
-**View:** [PDF Export](Demand_Forecasting_Model_Evaluation.pdf)
+**Download:** [Power BI Dashboard (.pbix)](<Demand Forecasting Model Evaluation.pbix>)
+**Download:** [Excel Workbook (.xlsx)](<Case Study Demand Forecasting.xlsx>)
+**View:** [PDF Export](<Demand Forecasting Model Evaluation.pdf>)
 
 ---
 
